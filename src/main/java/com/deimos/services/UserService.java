@@ -3,12 +3,17 @@ package com.deimos.services;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.deimos.dto.UserDto;
 import com.deimos.entities.Users;
 import com.deimos.repository.UserRepository;
+import com.deimos.utils.DataSecurity;
 
 @Service
 public class UserService {
@@ -24,21 +29,33 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	public ResponseEntity<String> signUp(Users user) {
+	public ResponseEntity<String> signUp(UserDto user) throws Exception {
+		
+		Users userToSave = new Users();
 		
 		Matcher validEmail = VALID_EMAIL_ADDRESS_REGEX.matcher(user.getEmail());
 		Matcher validPassword = VALID_PASSWORD_REGEX.matcher(user.getPassword());
-		Boolean usernameExists = userRepository.findByUsername(user.getUsername()).getUsername().isBlank();
+		Boolean usernameExists = userRepository.findByUsername(user.getUsername()) != null;
 		
 		if(Boolean.FALSE.equals(validEmail.find())) {
-			ResponseEntity.badRequest().body("Email inválido.");
+			return ResponseEntity.badRequest().body("Email inválido.");
 		}else if(Boolean.FALSE.equals(validPassword.find())) {
-			ResponseEntity.badRequest().body("Senha inválida, favor verificar padrão.");
-		}else if (Boolean.FALSE.equals(usernameExists)) {
-			ResponseEntity.badRequest().body("Nome de usuário existente.");
+			return ResponseEntity.badRequest().body("Senha inválida, favor verificar padrão.");
+		}else if (Boolean.TRUE.equals(usernameExists)) {
+			return ResponseEntity.badRequest().body("Nome de usuário existente.");
 		}
 		
-		userRepository.save(user);
+		SecretKey key = DataSecurity.generateKey(128);
+		IvParameterSpec iv = DataSecurity.generateIv();
+		String cipherTextPassword = DataSecurity.encrypt(user.getPassword(), key, iv);
+		
+		userToSave.setEmail(user.getEmail());
+		userToSave.setUsername(user.getUsername());
+		userToSave.setIv(iv.getIV());
+		userToSave.setKey(key.getEncoded());
+		userToSave.setPassword(cipherTextPassword);
+		
+		userRepository.save(userToSave);
 		
 		return ResponseEntity.created(null).build();
 	}

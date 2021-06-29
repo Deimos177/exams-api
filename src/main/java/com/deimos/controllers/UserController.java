@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deimos.entities.Users;
+import com.deimos.dto.UserDto;
 import com.deimos.services.UserService;
 
 @RestController
@@ -18,10 +18,8 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping("/signup")
-	public ResponseEntity<String> signUp(@RequestBody Users user) {
-
-		ResponseEntity<String> result = userService.signUp(user);
-		
-		return result;
+	public ResponseEntity<String> signUp(@RequestBody UserDto user) throws Exception {
+	
+		return userService.signUp(user);
 	}
 }

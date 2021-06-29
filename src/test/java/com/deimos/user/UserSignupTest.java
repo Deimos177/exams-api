@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.deimos.entities.Users;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
@@ -22,23 +23,23 @@ public class UserSignupTest {
 
 	@Autowired
 	private MockMvc mvc;
-	
-	@Autowired
-	private Users user;
 
 	@Test
 	public void signUpUser() throws Exception {
-		
-		user.setEmail("john.doe@test.com");
-		user.setPassword("123456");
-		user.setUsername("John Doe");
-		
-		MockHttpServletResponse result = mvc.perform(post("/user/signup")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content("test"))
-				.andReturn()
-				.getResponse();
-		
+
+		MockHttpServletResponse result = mvc
+				.perform(post("/user/signup").contentType(MediaType.APPLICATION_JSON)
+						.content(asJsonString(new Users("John Doe", "Test@123", "john.doe@test.com"))))
+				.andReturn().getResponse();
+
 		assertEquals(201, result.getStatus());
+	}
+
+	public static String asJsonString(final Object obj) {
+		try {
+			return new ObjectMapper().writeValueAsString(obj);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
