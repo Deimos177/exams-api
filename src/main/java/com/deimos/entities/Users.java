@@ -76,4 +76,12 @@ public class Users {
 
 	public Users() {
 	}
+
+	public Users(Users user) {
+		this.username = user.getUsername();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.iv = user.getIv();
+		this.key = user.getKey();
+	}
 }
