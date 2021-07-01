@@ -85,25 +85,6 @@ public class VerifyUserFields {
 	}
 
 	@Test
-	public void verifyIfPasswordIsEncripted() throws Exception {
-		MockHttpServletResponse result = mvc
-				.perform(post("/user/signup").contentType(MediaType.APPLICATION_JSON)
-						.content(asJsonString(new Users("John Doe", "123456", "john.doe@test.com"))))
-				.andReturn().getResponse();
-
-		assertEquals(400, result.getStatus());
-		assertEquals("Senha inválida, favor verificar padrão.", result.getContentAsString());
-	}
-
-	public static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Test
 	public void givenString_whenEncrypt_thenSuccess() throws NoSuchAlgorithmException, IllegalBlockSizeException,
 			InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
 
@@ -130,5 +111,13 @@ public class VerifyUserFields {
 		String decryptedPassword = DataSecurity.decrypt(userRetrived.getPassword(), new SecretKeySpec(userRetrived.getKey(), 0, userRetrived.getKey().length, "AES"), new IvParameterSpec(userRetrived.getIv()));
 		
 		assertEquals("Test@123", decryptedPassword);
+	}
+	
+	public static String asJsonString(final Object obj) {
+		try {
+			return new ObjectMapper().writeValueAsString(obj);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

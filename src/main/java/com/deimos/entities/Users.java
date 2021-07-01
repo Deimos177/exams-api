@@ -68,6 +68,14 @@ public class Users {
 		this.key = key;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Users(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
@@ -78,6 +86,7 @@ public class Users {
 	}
 
 	public Users(Users user) {
+		this.id = user.getId();
 		this.username = user.getUsername();
 		this.email = user.getEmail();
 		this.password = user.getPassword();
