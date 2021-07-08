@@ -2,9 +2,9 @@ package com.deimos.dto;
 
 public class UserDto {
 	
-	private String username;
-	private String password;
-	private String email;
+	public String username;
+	public String password;
+	public String email;
 	
 	public String getUsername() {
 		return username;

@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({
 	"username",
-	"email"
+	"email",
 })
-public class UserView {
+public class UserView extends GenericResponse{
 	
 	@JsonProperty("id")
 	private Long id;
@@ -17,6 +17,9 @@ public class UserView {
 	
 	@JsonProperty("username")
 	private String username;
+	
+	@JsonProperty("error")
+	private Boolean error;
 
 	public Long getId() {
 		return id;
@@ -40,5 +43,13 @@ public class UserView {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public Boolean getError() {
+		return error;
+	}
+
+	public void setError(Boolean error) {
+		this.error = error;
 	}
 }

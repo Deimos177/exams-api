@@ -21,6 +21,9 @@ public class Users {
 
 	@Column(nullable = false, unique = true)
 	private String email;
+	
+	@Column
+	private String token;
 
 	public String getUsername() {
 		return username;
@@ -74,6 +77,14 @@ public class Users {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public Users(String username, String password, String email) {

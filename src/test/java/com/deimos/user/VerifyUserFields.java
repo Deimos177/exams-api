@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.crypto.BadPaddingException;
@@ -56,8 +57,8 @@ public class VerifyUserFields {
 
 		userService.signUp(user);
 
-		Users userFinded = userRepository.findByUsername(user.getUsername());
-		Boolean usernameExists = userFinded == null;
+		Optional<Users> userFinded = userRepository.findByUsername(user.getUsername());
+		Boolean usernameExists = userFinded.isPresent();
 
 		assertEquals(false, usernameExists);
 	}
@@ -106,9 +107,10 @@ public class VerifyUserFields {
 
 		userService.signUp(user);
 		
-		Users userRetrived = userRepository.findByUsername("John-Doe");
+		Optional<Users> userRetrived = userRepository.findByUsername("John-Doe");
+		Users userReturn = userRetrived.get();
 		
-		String decryptedPassword = DataSecurity.decrypt(userRetrived.getPassword(), new SecretKeySpec(userRetrived.getKey(), 0, userRetrived.getKey().length, "AES"), new IvParameterSpec(userRetrived.getIv()));
+		String decryptedPassword = DataSecurity.decrypt(userReturn.getPassword(), new SecretKeySpec(userReturn.getKey(), 0, userReturn.getKey().length, "AES"), new IvParameterSpec(userReturn.getIv()));
 		
 		assertEquals("Test@123", decryptedPassword);
 	}
