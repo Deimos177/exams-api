@@ -1,4 +1,4 @@
-package com.deimos.utils;
+package com.exams.utils;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;

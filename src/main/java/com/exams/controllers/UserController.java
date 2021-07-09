@@ -1,4 +1,4 @@
-package com.deimos.controllers;
+package com.exams.controllers;
 
 import javax.websocket.server.PathParam;
 
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.deimos.dto.ResetPasswordRequest;
-import com.deimos.dto.UserDto;
-import com.deimos.services.UserService;
-import com.deimos.views.UserView;
+import com.exams.dto.ResetPasswordRequest;
+import com.exams.dto.UserDto;
+import com.exams.services.UserService;
+import com.exams.views.UserView;
 
 @RestController
 @RequestMapping("/user")

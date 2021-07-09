@@ -9,7 +9,7 @@
 		<version>2.5.2</version>
 		<relativePath />
 	</parent>
-	<groupId>com.deimos</groupId>
+	<groupId>com.exams</groupId>
 	<artifactId>exams-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>exams-api</name>

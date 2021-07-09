@@ -1,4 +1,4 @@
-package com.deimos.dto;
+package com.exams.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

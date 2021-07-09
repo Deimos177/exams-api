@@ -1,4 +1,4 @@
-package com.deimos.user;
+package com.exams.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -17,9 +17,9 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.deimos.entities.Users;
-import com.deimos.repository.UserRepository;
-import com.deimos.views.UserView;
+import com.exams.entities.Users;
+import com.exams.repository.UserRepository;
+import com.exams.views.UserView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)

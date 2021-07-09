@@ -1,4 +1,4 @@
-package com.deimos.entities;
+package com.exams.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

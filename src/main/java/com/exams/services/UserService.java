@@ -1,4 +1,4 @@
-package com.deimos.services;
+package com.exams.services;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -13,12 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
-import com.deimos.dto.UserDto;
-import com.deimos.entities.Users;
-import com.deimos.repository.UserRepository;
-import com.deimos.utils.DataSecurity;
-import com.deimos.utils.EmailService;
-import com.deimos.views.UserView;
+import com.exams.dto.UserDto;
+import com.exams.entities.Users;
+import com.exams.repository.UserRepository;
+import com.exams.utils.DataSecurity;
+import com.exams.utils.EmailService;
+import com.exams.views.UserView;
 
 @Service
 public class UserService {

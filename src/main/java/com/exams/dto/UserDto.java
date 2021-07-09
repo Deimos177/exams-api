@@ -1,4 +1,4 @@
-package com.deimos.dto;
+package com.exams.dto;
 
 public class UserDto {
 	

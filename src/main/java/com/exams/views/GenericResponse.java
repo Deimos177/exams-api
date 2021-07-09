@@ -1,4 +1,4 @@
-package com.deimos.views;
+package com.exams.views;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
