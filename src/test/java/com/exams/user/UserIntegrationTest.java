@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.exams.entities.Users;
 import com.exams.repository.UserRepository;
-import com.exams.views.UserView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)

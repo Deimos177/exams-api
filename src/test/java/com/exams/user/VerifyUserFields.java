@@ -3,15 +3,9 @@ package com.exams.user;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import javax.annotation.Resource;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -86,8 +80,7 @@ public class VerifyUserFields {
 	}
 
 	@Test
-	public void givenString_whenEncrypt_thenSuccess() throws NoSuchAlgorithmException, IllegalBlockSizeException,
-			InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
+	public void givenString_whenEncrypt_thenSuccess() throws Exception {
 
 		String input = "baeldung";
 		SecretKey key = DataSecurity.generateKey(128);

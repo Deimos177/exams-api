@@ -27,7 +27,7 @@ public class UserService {
 			Pattern.CASE_INSENSITIVE);
 
 	final Pattern VALID_PASSWORD_REGEX = Pattern
-			.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", Pattern.CASE_INSENSITIVE);
+			.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 
 	@Autowired
 	UserRepository userRepository;
