@@ -74,7 +74,6 @@ public class UserService {
 		userRepository.save(userToSave);
 
 		response.setEmail(userToSave.getEmail());
-		response.setId(userToSave.getId());
 		response.setUsername(userToSave.getUsername());
 		response.setError(false);
 

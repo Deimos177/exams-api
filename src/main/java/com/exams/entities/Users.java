@@ -5,8 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity(name = "users")
+@Table(name = "users")
 public class Users {
 
 	@Id
@@ -24,16 +28,23 @@ public class Users {
 	
 	@Column
 	private String token;
-
-	public String getUsername() {
-		return username;
-	}
 	
 	@Column(nullable = false)
 	private byte[] iv;
 	
 	@Column(nullable = false)
 	private byte[] key;
+
+	@Column(nullable = true, unique = true)
+	private String card_number;
+	
+	@ManyToOne
+	@JoinColumn(name = "health_insurances_id")
+	private HealthInsurance healthInsurance;
+
+	public String getUsername() {
+		return username;
+	}
 
 	public void setUsername(String username) {
 		this.username = username;
@@ -55,6 +66,14 @@ public class Users {
 		this.email = email;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	public byte[] getIv() {
 		return iv;
 	}
@@ -71,37 +90,43 @@ public class Users {
 		this.key = key;
 	}
 
-	public Long getId() {
-		return id;
+	public String getCard_number() {
+		return card_number;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCard_number(String card_number) {
+		this.card_number = card_number;
 	}
 
-	public String getToken() {
-		return token;
+	public HealthInsurance getHealthInsurance() {
+		return healthInsurance;
 	}
 
-	public void setToken(String token) {
+	public void setHealthInsurance(HealthInsurance healthInsurance) {
+		this.healthInsurance = healthInsurance;
+	}
+
+	public Users(String username, String password, String email, String token, byte[] iv, byte[] key,
+			String card_number, HealthInsurance healthInsurance) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
 		this.token = token;
+		this.iv = iv;
+		this.key = key;
+		this.card_number = card_number;
+		this.healthInsurance = healthInsurance;
+	}
+
+	public Users(Users users) {
+	}
+
+	public Users() {
 	}
 
 	public Users(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-	}
-
-	public Users() {
-	}
-
-	public Users(Users user) {
-		this.id = user.getId();
-		this.username = user.getUsername();
-		this.email = user.getEmail();
-		this.password = user.getPassword();
-		this.iv = user.getIv();
-		this.key = user.getKey();
 	}
 }
