@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity(name = "health_insurances")
 @Table(name = "health_insurances")
-public class HealthInsurance {
+public class HealthInsurances {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +41,6 @@ public class HealthInsurance {
 		this.users = users;
 	}
 
-	public HealthInsurance() {
+	public HealthInsurances() {
 	}
 }

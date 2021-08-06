@@ -40,7 +40,7 @@ public class Users {
 	
 	@ManyToOne
 	@JoinColumn(name = "health_insurances_id")
-	private HealthInsurance healthInsurance;
+	private HealthInsurances healthInsurance;
 
 	public String getUsername() {
 		return username;
@@ -98,16 +98,16 @@ public class Users {
 		this.card_number = card_number;
 	}
 
-	public HealthInsurance getHealthInsurance() {
+	public HealthInsurances getHealthInsurance() {
 		return healthInsurance;
 	}
 
-	public void setHealthInsurance(HealthInsurance healthInsurance) {
+	public void setHealthInsurance(HealthInsurances healthInsurance) {
 		this.healthInsurance = healthInsurance;
 	}
 
 	public Users(String username, String password, String email, String token, byte[] iv, byte[] key,
-			String card_number, HealthInsurance healthInsurance) {
+			String card_number, HealthInsurances healthInsurance) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
