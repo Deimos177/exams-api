@@ -80,17 +80,6 @@ public class VerifyUserFields {
 	}
 
 	@Test
-	public void givenString_whenEncrypt_thenSuccess() throws Exception {
-
-		String input = "baeldung";
-		SecretKey key = DataSecurity.generateKey(128);
-		IvParameterSpec ivParameterSpec = DataSecurity.generateIv();
-		String cipherText = DataSecurity.encrypt(input, key, ivParameterSpec);
-		String plainText = DataSecurity.decrypt(cipherText, key, ivParameterSpec);
-		assertEquals(input, plainText);
-	}
-
-	@Test
 	public void ifPasswordWasDecrypted() throws Exception {
 		UserDto user = new UserDto();
 

@@ -154,6 +154,8 @@ public class UserService {
 		user.setKey(key.getEncoded());
 		user.setPassword(cipherTextPassword);
 		user.setToken(null);
+		
+		userRepository.save(user);
 
 		response.setError(false);
 		response.setMessage("Senha atualizada com sucesso.");

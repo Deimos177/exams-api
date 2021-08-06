@@ -17,10 +17,6 @@ public class UserView extends GenericResponse{
 	
 	@JsonProperty("username")
 	private String username;
-	
-	@JsonProperty("error")
-	private Boolean error;
-
 	public Long getId() {
 		return id;
 	}
@@ -43,13 +39,5 @@ public class UserView extends GenericResponse{
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Boolean getError() {
-		return error;
-	}
-
-	public void setError(Boolean error) {
-		this.error = error;
 	}
 }
