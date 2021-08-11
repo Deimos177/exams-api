@@ -14,7 +14,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import com.exams.dto.UserDto;
-import com.exams.entities.Users;
+import com.exams.entities.User;
 import com.exams.repository.UserRepository;
 import com.exams.utils.DataSecurity;
 import com.exams.utils.EmailService;
@@ -37,7 +37,7 @@ public class UserService {
 
 	public ResponseEntity<UserView> signUp(UserDto user) throws Exception {
 
-		Users userToSave = new Users();
+		User userToSave = new User();
 		UserView response = new UserView();
 
 		Matcher validEmail = VALID_EMAIL_ADDRESS_REGEX.matcher(user.getEmail());
@@ -82,7 +82,7 @@ public class UserService {
 
 	public ResponseEntity<UserView> removeUser(String id) {
 
-		Optional<Users> user = userRepository.findById(Long.parseLong(id));
+		Optional<User> user = userRepository.findById(Long.parseLong(id));
 		UserView response = new UserView();
 
 		if (user.isEmpty()) {
@@ -91,7 +91,7 @@ public class UserService {
 			return ResponseEntity.status(404).body(response);
 		}
 
-		Users userToDelete = new Users(user.get());
+		User userToDelete = new User(user.get());
 		userRepository.delete(userToDelete);
 
 		response.setError(false);
@@ -101,7 +101,7 @@ public class UserService {
 
 	public ResponseEntity<UserView> createResetToken(String email) throws Exception {
 
-		Optional<Users> user = userRepository.findByEmail(email);
+		Optional<User> user = userRepository.findByEmail(email);
 		UserView response = new UserView();
 
 		if (user.isEmpty()) {
@@ -110,7 +110,7 @@ public class UserService {
 			return ResponseEntity.status(404).body(response);
 		}
 
-		Users userToUpdate = user.get();
+		User userToUpdate = user.get();
 
 		userToUpdate.setToken(UUID.randomUUID().toString());
 
@@ -127,7 +127,7 @@ public class UserService {
 
 	public ResponseEntity<UserView> resetPassword(String token, String password) throws Exception {
 
-		Optional<Users> userGeted = userRepository.findByResetToken(token);
+		Optional<User> userGeted = userRepository.findByResetToken(token);
 		UserView response = new UserView();
 
 		if (userGeted.isEmpty()) {
@@ -136,7 +136,7 @@ public class UserService {
 			return ResponseEntity.status(404).body(response);
 		}
 
-		Users user = userGeted.get();
+		User user = userGeted.get();
 
 		Matcher validPassword = VALID_PASSWORD_REGEX.matcher(user.getPassword());
 

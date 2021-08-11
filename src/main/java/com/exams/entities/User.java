@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity(name = "users")
 @Table(name = "users")
-public class Users {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,7 @@ public class Users {
 	
 	@ManyToOne
 	@JoinColumn(name = "health_insurances_id")
-	private HealthInsurances healthInsurance;
+	private HealthInsurance healthInsurance;
 
 	public String getUsername() {
 		return username;
@@ -98,16 +98,16 @@ public class Users {
 		this.card_number = card_number;
 	}
 
-	public HealthInsurances getHealthInsurance() {
+	public HealthInsurance getHealthInsurance() {
 		return healthInsurance;
 	}
 
-	public void setHealthInsurance(HealthInsurances healthInsurance) {
+	public void setHealthInsurance(HealthInsurance healthInsurance) {
 		this.healthInsurance = healthInsurance;
 	}
 
-	public Users(String username, String password, String email, String token, byte[] iv, byte[] key,
-			String card_number, HealthInsurances healthInsurance) {
+	public User(String username, String password, String email, String token, byte[] iv, byte[] key,
+			String card_number, HealthInsurance healthInsurance) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -118,13 +118,13 @@ public class Users {
 		this.healthInsurance = healthInsurance;
 	}
 
-	public Users(Users users) {
+	public User(User users) {
 	}
 
-	public Users() {
+	public User() {
 	}
 
-	public Users(String username, String password, String email) {
+	public User(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;

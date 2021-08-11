@@ -6,17 +6,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.exams.entities.Users;
+import com.exams.entities.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Long>{
+public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query(value = "select user from users user where user.username = ?1")
-	Optional<Users> findByUsername(String username);
+	Optional<User> findByUsername(String username);
 	
 	@Query(value = "select user from users user where user.email = ?1")
-	Optional<Users> findByEmail(String email);
+	Optional<User> findByEmail(String email);
 	
 	@Query(value = "select user from users user where user.token = ?1")
-	Optional<Users> findByResetToken(String token);
+	Optional<User> findByResetToken(String token);
 }

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity(name = "health_insurances")
 @Table(name = "health_insurances")
-public class HealthInsurances {
+public class HealthInsurance {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class HealthInsurances {
 	private String name;
 	
 	@OneToMany(mappedBy = "healthInsurance")
-	private List<Users> users = new ArrayList<>();
+	private List<User> users = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -33,14 +33,14 @@ public class HealthInsurances {
 		this.name = name;
 	}
 
-	public List<Users> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<Users> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
-	public HealthInsurances() {
+	public HealthInsurance() {
 	}
 }
