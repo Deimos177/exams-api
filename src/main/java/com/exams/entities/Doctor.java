@@ -1,10 +1,13 @@
 package com.exams.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,9 @@ public class Doctor {
 	
 	@Column(nullable = false)
 	private String specialty;
+	
+	@ManyToMany(mappedBy = "doctors")
+	private List<Clinic> clinics;
 
 	public Doctor() {
 	}
@@ -48,5 +54,12 @@ public class Doctor {
 	public void setSpecialty(String specialty) {
 		this.specialty = specialty;
 	}
-	
+
+	public List<Clinic> getClinics() {
+		return clinics;
+	}
+
+	public void setClinics(List<Clinic> clinics) {
+		this.clinics = clinics;
+	}
 }

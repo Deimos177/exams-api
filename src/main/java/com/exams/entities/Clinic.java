@@ -1,10 +1,15 @@
 package com.exams.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,20 +28,21 @@ public class Clinic {
 
 	@Column(nullable = false)
 	private String zipCode;
-	
+
 	@Column(nullable = false)
 	private String addressNumber;
 
 	private String averageScore;
 
+	@ManyToMany
+	@JoinTable(name = "doctors_clinics", joinColumns = @JoinColumn(name = "clinic_id"), inverseJoinColumns = @JoinColumn(name = "doctor_id"))
+	private List<Doctor> doctors;
+
 	public Clinic() {
 	}
-	
-	
 
 	public Clinic(Long id, Double latitude, Double longitude, String zipCode, String addressNumber,
 			String averageScore) {
-		super();
 		this.id = id;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -44,8 +50,6 @@ public class Clinic {
 		this.addressNumber = addressNumber;
 		this.averageScore = averageScore;
 	}
-
-
 
 	public Double getLatitude() {
 		return latitude;
@@ -91,6 +95,11 @@ public class Clinic {
 		return id;
 	}
 
-	
-	
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
 }
