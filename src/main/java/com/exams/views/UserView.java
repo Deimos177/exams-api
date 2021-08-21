@@ -9,25 +9,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class UserView extends GenericResponse{
 	
-	@JsonProperty("id")
-	private Long id;
-	
 	@JsonProperty("email")
 	private String email;
 	
 	@JsonProperty("username")
 	private String username;
-	
-	@JsonProperty("error")
-	private Boolean error;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;
@@ -43,13 +29,5 @@ public class UserView extends GenericResponse{
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Boolean getError() {
-		return error;
-	}
-
-	public void setError(Boolean error) {
-		this.error = error;
 	}
 }

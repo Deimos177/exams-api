@@ -17,7 +17,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.exams.entities.Users;
+import com.exams.entities.User;
 import com.exams.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,7 +37,7 @@ public class UserIntegrationTest {
 
 		MockHttpServletResponse result = mvc
 				.perform(post("/user/signup").contentType(MediaType.APPLICATION_JSON)
-						.content(asJsonString(new Users("John Doe", "Test@123", "john.doe@test.com"))))
+						.content(asJsonString(new User("John Doe", "Test@123", "john.doe@test.com"))))
 				.andReturn().getResponse();
 
 		assertEquals(201, result.getStatus());
@@ -57,7 +57,7 @@ public class UserIntegrationTest {
 	public void updatePassword() throws Exception{
 		
 		MockHttpServletResponse createResult = mvc.perform(post("/user/signup").contentType(MediaType.APPLICATION_JSON)
-				.content(asJsonString(new Users("Jane Doe", "Jane@123", "jane.doe@test.com"))))
+				.content(asJsonString(new User("Jane Doe", "Jane@123", "jane.doe@test.com"))))
 		.andReturn()
 		.getResponse();
 		
