@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +27,10 @@ public class HealthInsurance {
 	
 	@OneToMany(mappedBy = "healthInsurance")
 	private List<User> users = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "insurances_clinics", joinColumns = @JoinColumn(name = "health_insurance_id"), inverseJoinColumns = @JoinColumn(name = "clinic_id"))
+	private List<Clinic> clinics;
 
 	public String getName() {
 		return name;

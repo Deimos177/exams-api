@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +38,12 @@ public class Clinic {
 	@ManyToMany
 	@JoinTable(name = "doctors_clinics", joinColumns = @JoinColumn(name = "clinic_id"), inverseJoinColumns = @JoinColumn(name = "doctor_id"))
 	private List<Doctor> doctors;
+	
+	@OneToOne(mappedBy = "clinic_id")
+	private Administrator administrator;
+	
+	@ManyToMany(mappedBy = "clinics")
+	private List<HealthInsurance> healthInsurances;
 
 	public Clinic() {
 	}
@@ -101,5 +108,13 @@ public class Clinic {
 
 	public void setDoctors(List<Doctor> doctors) {
 		this.doctors = doctors;
+	}
+
+	public Administrator getAdministrator() {
+		return administrator;
+	}
+
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
 	}
 }
