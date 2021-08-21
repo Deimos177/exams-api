@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.exams.dto.UserDto;
-import com.exams.entities.Users;
+import com.exams.entities.User;
 import com.exams.repository.UserRepository;
 import com.exams.services.UserService;
 import com.exams.utils.DataSecurity;
@@ -51,7 +51,7 @@ public class VerifyUserFields {
 
 		userService.signUp(user);
 
-		Optional<Users> userFinded = userRepository.findByUsername(user.getUsername());
+		Optional<User> userFinded = userRepository.findByUsername(user.getUsername());
 		Boolean usernameExists = userFinded.isPresent();
 
 		assertEquals(false, usernameExists);
@@ -61,7 +61,7 @@ public class VerifyUserFields {
 	public void verifyIfEmailIsValid() throws Exception {
 		MockHttpServletResponse result = mvc
 				.perform(post("/user/signup").contentType(MediaType.APPLICATION_JSON)
-						.content(asJsonString(new Users("John Doe", "Test@123", "john.doe@test"))))
+						.content(asJsonString(new User("John Doe", "Test@123", "john.doe@test"))))
 				.andReturn().getResponse();
 
 		assertEquals(400, result.getStatus());
@@ -72,22 +72,11 @@ public class VerifyUserFields {
 	public void verifyIfPasswordValid() throws Exception {
 		MockHttpServletResponse result = mvc
 				.perform(post("/user/signup").contentType(MediaType.APPLICATION_JSON)
-						.content(asJsonString(new Users("John Doe", "123456", "john.doe@test.com"))))
+						.content(asJsonString(new User("John Doe", "123456", "john.doe@test.com"))))
 				.andReturn().getResponse();
 
 		assertEquals(400, result.getStatus());
 		assertEquals("Senha inválida, favor verificar padrão.", result.getContentAsString());
-	}
-
-	@Test
-	public void givenString_whenEncrypt_thenSuccess() throws Exception {
-
-		String input = "baeldung";
-		SecretKey key = DataSecurity.generateKey(128);
-		IvParameterSpec ivParameterSpec = DataSecurity.generateIv();
-		String cipherText = DataSecurity.encrypt(input, key, ivParameterSpec);
-		String plainText = DataSecurity.decrypt(cipherText, key, ivParameterSpec);
-		assertEquals(input, plainText);
 	}
 
 	@Test
@@ -100,8 +89,8 @@ public class VerifyUserFields {
 
 		userService.signUp(user);
 		
-		Optional<Users> userRetrived = userRepository.findByUsername("John-Doe");
-		Users userReturn = userRetrived.get();
+		Optional<User> userRetrived = userRepository.findByUsername("John-Doe");
+		User userReturn = userRetrived.get();
 		
 		String decryptedPassword = DataSecurity.decrypt(userReturn.getPassword(), new SecretKeySpec(userReturn.getKey(), 0, userReturn.getKey().length, "AES"), new IvParameterSpec(userReturn.getIv()));
 		
