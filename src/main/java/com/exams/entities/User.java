@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity(name = "users")
@@ -41,6 +42,9 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "health_insurances_id")
 	private HealthInsurance healthInsurance;
+	
+	@OneToOne(mappedBy = "patient_id")
+	private Exam exam;
 
 	public String getUsername() {
 		return username;
@@ -104,6 +108,14 @@ public class User {
 
 	public void setHealthInsurance(HealthInsurance healthInsurance) {
 		this.healthInsurance = healthInsurance;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
 	}
 
 	public User(String username, String password, String email, String token, byte[] iv, byte[] key,

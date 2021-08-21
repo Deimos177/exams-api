@@ -44,6 +44,9 @@ public class Clinic {
 	
 	@ManyToMany(mappedBy = "clinics")
 	private List<HealthInsurance> healthInsurances;
+	
+	@OneToOne(mappedBy = "clinic_id")
+	private Exam exam;
 
 	public Clinic() {
 	}
@@ -116,5 +119,21 @@ public class Clinic {
 
 	public void setAdministrator(Administrator administrator) {
 		this.administrator = administrator;
+	}
+
+	public List<HealthInsurance> getHealthInsurances() {
+		return healthInsurances;
+	}
+
+	public void setHealthInsurances(List<HealthInsurance> healthInsurances) {
+		this.healthInsurances = healthInsurances;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
 	}
 }

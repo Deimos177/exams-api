@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity(name = "avaliations")
@@ -23,6 +24,9 @@ public class Avaliation {
 	
 	@Column
 	private String status;
+	
+	@OneToOne(mappedBy = "avaliation_id")
+	private Exam exam;
 
 	public Double getStars() {
 		return stars;
@@ -46,5 +50,13 @@ public class Avaliation {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
 	}
 }

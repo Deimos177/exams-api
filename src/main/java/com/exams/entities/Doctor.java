@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +27,9 @@ public class Doctor {
 	
 	@ManyToMany(mappedBy = "doctors")
 	private List<Clinic> clinics;
+	
+	@OneToOne(mappedBy = "doctor_id")
+	private Exam exam;
 
 	public Doctor() {
 	}
@@ -61,5 +65,13 @@ public class Doctor {
 
 	public void setClinics(List<Clinic> clinics) {
 		this.clinics = clinics;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
 	}
 }
