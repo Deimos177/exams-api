@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.exams.dto.UserDto;
 import com.exams.entities.User;
 import com.exams.repository.UserRepository;
-import com.exams.services.UserService;
+import com.exams.services.impl.UserServiceImpl;
 import com.exams.utils.DataSecurity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -34,7 +34,7 @@ public class VerifyUserFields {
 	@Resource
 	private UserRepository userRepository;
 	
-	@Resource private UserService userService; 
+	@Resource private UserServiceImpl userService; 
 
 	@Autowired
 	private MockMvc mvc;

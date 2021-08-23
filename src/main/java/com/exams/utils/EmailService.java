@@ -20,7 +20,7 @@ public class EmailService {
 	    Properties props = mailSender.getJavaMailProperties();
 	    
 	    props.put("mail.smtp.host", "smtp.gmail.com");  
-	    props.put("mail.smtp.auth", "true");  
+	    props.put("mail.smtp.auth", "true"); 
 	    props.put("mail.smtp.port", "465");  
 	    props.put("mail.smtp.starttls.enable", "true");  
 	    props.put("mail.smtp.socketFactory.port", "465");  

@@ -1,4 +1,4 @@
-package com.exams.controllers;
+package com.exams.controller;
 
 import javax.websocket.server.PathParam;
 
@@ -22,7 +22,7 @@ import com.exams.views.UserView;
 
 @RestController
 @RequestMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-public class UserController {
+public class UserControllerImpl{
 
 	@Autowired
 	UserService userService;
